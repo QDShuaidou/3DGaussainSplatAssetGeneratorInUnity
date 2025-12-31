@@ -744,7 +744,7 @@ if __name__ == "__main__":
     import argparse
     
     parser = argparse.ArgumentParser(description='Convert PLY file to Unity Gaussian Splat Asset')
-    parser.add_argument('ply_path', nargs='?', default='point_cloud_truck.ply', help='Path to input PLY file (default: point_cloud.ply)')
+    parser.add_argument('ply_path', nargs='?', default='point_cloud.ply', help='Path to input PLY file (default: point_cloud.ply)')
     parser.add_argument('output_dir', nargs='?', default='output', help='Output directory for assets (default: output)')
     parser.add_argument('--quality', choices=QUALITY_PRESETS.keys(), default='VeryHigh',
                       help='Quality preset (default: VeryHigh)')
