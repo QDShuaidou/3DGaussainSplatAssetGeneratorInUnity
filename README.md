@@ -36,7 +36,7 @@ This means you can now produce GaussianSplatAsset files at runtime in your Unity
 
 Waiting for a while ,then you can find **xxx.asset** file and **xxx_pos.bytes | xxx_col.bytes | xxx_oth.bytes | xxx_shs.bytes** files have been created in **output** folder. You can drag all files in the output folder directly to the Unity and use them!
 
-
+there are also some parameters for selection,such as --quality VeryHigh/High/Medium and so on.you can find out from under if __name__ == "__main__": 
 
 
 
