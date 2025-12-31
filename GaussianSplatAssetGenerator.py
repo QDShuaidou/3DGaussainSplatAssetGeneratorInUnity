@@ -596,13 +596,13 @@ NativeFormatImporter:
                 f.write(meta_template.format(guid=guids[data_type]))
 
     def create_asset(self, ply_path, output_dir, truth_asset_path=None):
-        print(f"读取PLY文件: {ply_path}")
+        print(f"Reading PLY file: {ply_path}")
         data = self.read_ply(ply_path)
         
-        print(f"点云数量: {len(data.positions)}")
-        print(f"边界: min={self.bounds_min}, max={self.bounds_max}")
+        print(f"numbers of points: {len(data.positions)}")
+        print(f"Bounds: min={self.bounds_min}, max={self.bounds_max}")
         
-        print("执行Morton编码重新排序...")
+        print("Morton encoding and sorting...")
         sorted_indices = self.reorder_morton(data.positions)
         
         data.positions = data.positions[sorted_indices]
@@ -611,30 +611,30 @@ NativeFormatImporter:
         data.colors = data.colors[sorted_indices]
         data.sh_coeffs = data.sh_coeffs[sorted_indices]
         
-        print("编码位置数据...")
+        print("Encoding positions...")
         pos_data = self.encode_positions(data.positions)
         
-        print("编码颜色数据...")
+        print("Encoding colors...")
         col_data = self.encode_colors(data.colors)
         
-        print("编码缩放和旋转数据...")
+        print("Encoding scales and rotations...")
         oth_data = self.encode_scales(data.scales, data.rotations)
         
-        print("编码SH系数...")
+        print("Encoding SH coefficients...")
         sh_data, sh_indices = self.encode_sh(data.sh_coeffs)
         
-        print("生成GUID...")
+        print("Generating GUIDs...")
         pos_guid = self._generate_guid(pos_data)
         col_guid = self._generate_guid(col_data)
         oth_guid = self._generate_guid(oth_data)
         sh_guid = self._generate_guid(sh_data)
         
-        print("计算数据哈希...")
+        print("Calculating data hash...")
         data_hash = self._calculate_data_hash(pos_data, col_data, oth_data, sh_data)
         
         os.makedirs(output_dir, exist_ok=True)
         
-        print("写入二进制数据文件...")
+        print("Writing binary data files...")
         asset_name = os.path.splitext(os.path.basename(ply_path))[0]
         file_names = {
             'pos': f'{asset_name}_pos.bytes',
@@ -652,7 +652,7 @@ NativeFormatImporter:
         with open(os.path.join(output_dir, file_names['shs']), 'wb') as f:
             f.write(sh_data)
         
-        print("创建Unity .asset文件...")
+        print("Creating Unity .asset file...")
         self.create_asset_file(
             output_dir=output_dir,
             asset_name=asset_name,
@@ -666,7 +666,7 @@ NativeFormatImporter:
             data_hash=data_hash
         )
         
-        print("生成.meta文件...")
+        print("Generating meta files...")
         guids_dict = {
             'pos': pos_guid,
             'col': col_guid,
@@ -675,7 +675,7 @@ NativeFormatImporter:
         }
         self._generate_meta_files(output_dir, file_names, guids_dict)
         
-        print(f"完成！资产已保存到: {output_dir}")
+        print(f"Done! Asset saved to: {output_dir}")
         print(f"  - {asset_name}.asset")
         print(f"  - pos.bytes ({len(pos_data)} bytes)")
         print(f"  - col.bytes ({len(col_data)} bytes)")
@@ -684,7 +684,7 @@ NativeFormatImporter:
 
     def create_asset_file(self, output_dir, asset_name, pos_guid, col_guid, oth_guid, shs_guid, 
                          splat_count, bounds_min, bounds_max, data_hash):
-        """创建 Unity .asset 文件（参考正确的格式）"""
+        """Create Unity .asset file"""
         asset_path = os.path.join(output_dir, f'{asset_name}.asset')
         
         content = f"""%YAML 1.1
