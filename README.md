@@ -29,7 +29,7 @@ This means you can now produce GaussianSplatAsset files at runtime in your Unity
 ## Usage
 
 1. put your PLY binary file(xxx.ply) in the root folder (﻿ Located in the same directory as the GaussianSplatAssetGenerator.py)
-
+   then rename it as point_cloud.ply
 2. run `python GaussianSplatAssetGenerator.py `  
 
 
