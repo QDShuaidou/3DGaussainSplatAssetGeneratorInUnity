@@ -9,7 +9,7 @@ This means you can now produce GaussianSplatAsset files at runtime in your Unity
 
 ## Install
 
-1. download zip or run `git clone https://github.com/QDShuaidou/3DGaussainSplatAssetGeneratorInUnity.git` to your empty folder as project root folder
+1. download zip or run `git clone https://github.com/QDShuaidou/3DGaussianSplatAssetGeneratorInUnity.git` to your empty folder as project root folder
 
 2. go to your root folder and inputs:
 
